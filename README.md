@@ -1,9 +1,9 @@
-# Demos
+# demos
 `Work In Progress...`
 
 Line simplification applications 
 
-## constrained RDP Algorithm
+## constrained RDP algorithm
 Contextual simplification of polylines using the 
 [RDP Algorithm][0]. The [algorithm][1] is a recursive decomposition of 
 a polyline given the maximum offset distance threshold (![epsilon][2]) 

@@ -1,8 +1,8 @@
-## Constrained RDP Algorithm
+## constrained RDP algorithm
 Constrained simplification of arbitrary polylines in the context 
 of arbitrary planar geometries.
 
-### How to use 
+### how to use 
 Open a terminal (command line) from the directory containing constdp[.exe]. Simplification options are made available through  the use of [TOML][0] file (config.toml). Execute constdp with the following command :
 ```bash
 ./constdp -c ./config.toml 
@@ -37,7 +37,7 @@ GeomRelation           = false
 DistRelation           = false
 SideRelation           = false
 ```
-#### Example
+#### example
 Given a polyline in `resource/input.wkt`
 ```toml
 Input                  = "resource/input.wkt"
