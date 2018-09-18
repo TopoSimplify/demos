@@ -1,10 +1,10 @@
 Input                  = "resource/input.wkt"
 Output                 = ""
-Constraints            = ""
+Constraints            = "resource/constraints.wkt"
 SimplificationType     = "DP"
-Threshold              = 0.0
-MinDist                = 100.0
-RelaxDist              = 0.0
+Threshold              = 50.0
+MinDist                = 20.0
+RelaxDist              = 30.0
 IsFeatureClass         = false
 PlanarSelf             = false
 NonPlanarSelf          = false
