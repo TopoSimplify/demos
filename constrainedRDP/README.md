@@ -3,11 +3,11 @@ Constrained simplification of arbitrary polylines in the context
 of arbitrary planar geometries.
 
 ### how to use 
-Open a terminal (command line) from the directory containing constdp[.exe]. Simplification options are made available through  the use of [TOML][0] file (config.toml). Execute constdp with the following command :
+Open a terminal (command line) from the directory containing constdp[.exe]. Simplification options are made available through  the use of a [TOML][0] file (config.toml). Execute `constdp` with the following command :
 ```bash
 ./constdp -c ./config.toml 
 ```
-If a `-c` option is not provided at the terminal e.g. `./constdp`, it assumes `-c ./config.toml` as default.
+If a `-c` option is not provided at the terminal e.g. `./constdp`, it assumes `./config.toml` as the default configuration file.
 
 #### config file 
 ```toml

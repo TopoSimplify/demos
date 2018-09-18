@@ -12,6 +12,7 @@ import (
 	"github.com/TopoSimplify/opts"
 )
 
+var Output = "./out.txt"
 var ConfigPath string
 var wktPoint = []byte("point")
 var wktPolygon = []byte("polygon")
@@ -27,6 +28,16 @@ func main() {
 
 	var cfg = readConfig()
 	var options = optsFromCfg(cfg)
+	var constraints []geom.Geometry
+	var simpleCoords []geom.Coords
+
+	//config simplification type
+	cfg.SimplificationType = strings.ToLower(strings.TrimSpace(cfg.SimplificationType))
+	var offsetFn = offsetDictionary[cfg.SimplificationType]
+	if offsetFn == nil {
+		log.Println(`Supported Simplification Types : "DP" or "SED", Fix config.toml file`)
+		os.Exit(1)
+	}
 
 	var polyCoords, err = readPolyline(cfg.Input)
 	if err != io.EOF {
@@ -34,7 +45,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	var constraints []geom.Geometry
+	// config output
+	cfg.Output = strings.TrimSpace(cfg.Output)
+	if cfg.Output == "" {
+		cfg.Output = Output
+	}
+
+	// config constraints
 	cfg.Constraints = strings.TrimSpace(cfg.Constraints)
 	if cfg.Constraints != "" {
 		constraints, err = readConstraints(cfg.Constraints)
@@ -44,15 +61,18 @@ func main() {
 		}
 	}
 
-	var outputLns []*geom.LineString
-
+	// simplify
 	if cfg.IsFeatureClass {
-		outputLns = simplifyFeatureClass(polyCoords, &options, constraints)
+		simpleCoords = simplifyFeatureClass(polyCoords, &options, constraints, offsetFn)
 	} else {
-		outputLns = simplifyInstances(polyCoords, &options, constraints)
+		simpleCoords = simplifyInstances(polyCoords, &options, constraints, offsetFn)
 	}
-	for _, o := range outputLns {
-		fmt.Println(o.WKT())
+
+	switch cfg.SimplificationType {
+	case "dp":
+		writeCoords(cfg.Output, simpleCoords, geom.WriteWKT)
+	case "sed":
+		writeCoords(cfg.Output, simpleCoords, geom.WriteWKT3D)
 	}
 }
 

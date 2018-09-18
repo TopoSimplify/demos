@@ -1,0 +1,13 @@
+Input                  = "/path/to/input.[wkt]"
+Output                 = "/path/to/output.[wkt]"
+Constraints            = "/path/to/constraints.[wkt]"
+SimplificationType     = "DP"
+Threshold              = 0.0
+MinDist                = 0.0
+RelaxDist              = 0.0
+PlanarSelf             = false
+NonPlanarSelf          = false
+AvoidNewSelfIntersects = false
+GeomRelation           = false
+DistRelation           = false
+SideRelation           = false

@@ -5,17 +5,17 @@ import (
 	"github.com/intdxdt/iter"
 	"github.com/TopoSimplify/opts"
 	"github.com/TopoSimplify/constdp"
-	"github.com/TopoSimplify/offset"
 )
 
-func simplifyInstances(lns []geom.Coords, opts *opts.Opts, constraints []geom.Geometry) []*geom.LineString {
+func simplifyInstances(lns []geom.Coords, opts *opts.Opts, constraints []geom.Geometry,
+	offsetFn func(geom.Coords) (int, float64)) []geom.Coords {
 	var id = iter.NewIgen()
 	var forest []*constdp.ConstDP
 	var junctions = make(map[int][]int, 0)
 
 	for _, ln := range lns {
 		forest = append(forest, constdp.NewConstDP(
-			id.Next(), ln, constraints, opts, offset.MaxOffset,
+			id.Next(), ln, constraints, opts, offsetFn,
 		))
 	}
 	constdp.SimplifyInstances(id, forest, junctions)
@@ -23,12 +23,13 @@ func simplifyInstances(lns []geom.Coords, opts *opts.Opts, constraints []geom.Ge
 	return extractSimpleSegs(forest)
 }
 
-func simplifyFeatureClass(lns []geom.Coords, opts *opts.Opts, constraints []geom.Geometry) []*geom.LineString {
+func simplifyFeatureClass(lns []geom.Coords, opts *opts.Opts, constraints []geom.Geometry,
+	offsetFn func(geom.Coords) (int, float64)) []geom.Coords {
 	var id = iter.NewIgen()
 	var forest []*constdp.ConstDP
 	for _, ln := range lns {
 		forest = append(forest, constdp.NewConstDP(
-			id.Next(), ln, constraints, opts, offset.MaxOffset,
+			id.Next(), ln, constraints, opts, offsetFn,
 		))
 	}
 
@@ -36,15 +37,15 @@ func simplifyFeatureClass(lns []geom.Coords, opts *opts.Opts, constraints []geom
 	return extractSimpleSegs(forest)
 }
 
-func extractSimpleSegs(forest []*constdp.ConstDP) []*geom.LineString {
-	var simpleLns []*geom.LineString
+func extractSimpleSegs(forest []*constdp.ConstDP) []geom.Coords {
+	var simpleCoords []geom.Coords
 	for _, tree := range forest {
-		var coords = tree.Coordinates()
+		var coords = tree.Coordinates().Clone()
 		coords.Idxs = make([]int, 0, tree.SimpleSet.Size())
 		for _, o := range tree.SimpleSet.Values() {
 			coords.Idxs = append(coords.Idxs, o.(int))
 		}
-		simpleLns = append(simpleLns, geom.NewLineString(coords))
+		simpleCoords = append(simpleCoords, coords)
 	}
-	return simpleLns
+	return simpleCoords
 }

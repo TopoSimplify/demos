@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"strings"
 	"github.com/intdxdt/geom"
+	"github.com/intdxdt/fileutil"
+	"path/filepath"
 )
 
 func readConstraints(fname string) ([]geom.Geometry, error) {
@@ -57,6 +59,29 @@ func readlinesFromReader(reader *bufio.Reader, callback func(lnStr string)) (err
 		line = strings.TrimSpace(line)
 		if len(line) > 0 {
 			callback(line)
+		}
+	}
+	return err
+}
+
+func writeCoords(fname string, coords []geom.Coords, writer func (*geom.WKTParserObj) string ) error {
+	var baseDir, _ = filepath.Split(fname)
+	var err = fileutil.MakeDirs(baseDir)
+	if err != nil {
+		return err
+	}
+
+	fid, err := os.Create(fname)
+	if err != nil {
+		return err
+	}
+
+	for _, o := range coords {
+		_, err = fid.WriteString(writer(
+			geom.NewWKTParserObj(geom.GeoTypeLineString, o),
+		) + "\n")
+		if err != nil {
+			break
 		}
 	}
 	return err

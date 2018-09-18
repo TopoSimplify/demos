@@ -1,13 +1,29 @@
 #!/usr/bin/env bash
+distLinux=../dist/constdp/linux
+distWin=../dist/constdp/windows
+distMac=../dist/constdp/mac
 
 echo "building linux binary"
-go build -o ../dist/constdp/constdp
-chmod +x ../dist/constdp/constdp
-echo "..........done............."
+GOOS=linux GOARCH=amd64 go build -o ${distLinux}/constdp
+GOOS=linux GOARCH=386   go build -o ${distLinux}/constdp_32bit
+
+chmod +x ${distLinux}/constdp
+chmod +x ${distLinux}/constdp_32bit
+echo "....................done.................."
 
 echo "building windows binary"
-GOOS=windows go build -o ../dist/constdp/constdp.exe
-echo "..........done............."
+GOOS=windows GOARCH=amd64 go build -o ${distWin}/constdp.exe
+GOOS=windows GOARCH=386   go build -o ${distWin}/constdp_32bit.exe
+echo "...................done.................."
 
-\cp -rf ./resource/cfg.toml ../dist/constdp/
+echo "building mac binary"
+GOOS=darwin GOARCH=amd64 go build -o ${distMac}/constdp
+GOOS=darwin GOARCH=386   go build -o ${distMac}/constdp_32bit
+echo "...................done.................."
+
+for dist in ${distMac}  ${distWin} ${distLinux}
+do
+    \cp -rf ./resource/config.toml ${dist}/
+done
+
 node docs.js
