@@ -1,0 +1,14 @@
+Input                  = "resource/input.wkt"
+Output                 = ""
+Constraints            = ""
+SimplificationType     = "DP"
+Threshold              = 0.0
+MinDist                = 100.0
+RelaxDist              = 0.0
+IsFeatureClass         = false
+PlanarSelf             = false
+NonPlanarSelf          = false
+AvoidNewSelfIntersects = false
+GeomRelation           = false
+DistRelation           = false
+SideRelation           = false
