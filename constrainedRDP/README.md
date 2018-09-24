@@ -1,6 +1,6 @@
 ## constrained RDP algorithm
 Constrained simplification of arbitrary polylines in the context 
-of arbitrary planar geometries.
+of arbitrary planar geometries. [Download][9] and try it on Windows, Linux or Mac.
 
 ### how to use 
 Open a terminal (command line) from the directory containing an executable (constdp[.exe] for 64bit, constdp_32bit[.exe] for 32bit systems). Simplification options are made available through  the use of a [TOML][0] file (config.toml). Execute `constdp` with the following command :
@@ -134,3 +134,4 @@ SideRelation           = false
 [6]: <./resource/constraints.toml> "constraints toml"
 [7]: <./resource/input.wkt> "input wkt"
 [8]: <./resource/constraints.wkt> "constraints wkt"
+[9]: <https://github.com/TopoSimplify/demos/tree/master/dist/constdp> "dist"
