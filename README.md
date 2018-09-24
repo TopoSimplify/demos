@@ -1,5 +1,6 @@
 # demos
-Line simplification applications 
+[Tools][6] for topological line simplification in the context of arbitrary
+planar objects (point, lines, and polygons).  
 
 ## constrained RDP algorithm
 Contextual simplification of polylines using the 
