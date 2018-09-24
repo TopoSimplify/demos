@@ -1,29 +1,38 @@
 #!/usr/bin/env bash
+dpDIR=$PWD
+tmpDIR=../dist/constdp/tmp
+mkdir -p ${tmpDIR}
+
 distLinux=../dist/constdp/linux
 distWin=../dist/constdp/windows
 distMac=../dist/constdp/mac
 
-echo "building linux binary"
-GOOS=linux GOARCH=amd64 go build -o ${distLinux}/constdp
-GOOS=linux GOARCH=386   go build -o ${distLinux}/constdp_32bit
 
-chmod +x ${distLinux}/constdp
-chmod +x ${distLinux}/constdp_32bit
-echo "....................done.................."
+#goos exec ext
+function build_archive () {
+    goos=$1
+    exec=$2
+    ext=$3
+    arch_postfix=$4
 
-echo "building windows binary"
-GOOS=windows GOARCH=amd64 go build -o ${distWin}/constdp.exe
-GOOS=windows GOARCH=386   go build -o ${distWin}/constdp_32bit.exe
-echo "...................done.................."
+    echo "building $goos binary"
+    GOOS=${goos} GOARCH=amd64 go build -o ${tmpDIR}/${exec}${ext}
+    GOOS=${goos} GOARCH=386   go build -o ${tmpDIR}/${exec}_32bit${ext}
+    chmod +x ${tmpDIR}/${exec}${ext}
+    chmod +x ${tmpDIR}/${exec}_32bit${ext}
 
-echo "building mac binary"
-GOOS=darwin GOARCH=amd64 go build -o ${distMac}/constdp
-GOOS=darwin GOARCH=386   go build -o ${distMac}/constdp_32bit
-echo "...................done.................."
+    \cp -rf ./resource/config.toml ${tmpDIR}/
 
-for dist in ${distMac}  ${distWin} ${distLinux}
-do
-    \cp -rf ./resource/config.toml ${dist}/
-done
+    cd ${tmpDIR}
+        zip -r constdp_${arch_postfix}.zip *
+        mv constdp_${arch_postfix}.zip ../
+        rm -rf *
+    cd ${dpDIR}
+    echo ".................done - $goos.................."
+}
+
+build_archive "linux" "constdp" "" "linux"
+build_archive "windows" "constdp" ".exe" "windows"
+build_archive "darwin" "constdp" "" "mac"
 
 node docs.js

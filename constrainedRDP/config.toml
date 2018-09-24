@@ -1,11 +1,11 @@
-Input                  = "resource/input.wkt"
-Output                 = ""
-Constraints            = "resource/constraints.wkt"
+Input                  = "resource/input.toml"
+Output                 = "./out.txt"
+Constraints            = "resource/constraints.toml"
 SimplificationType     = "dp"
 Threshold              = 50.0
 MinDist                = 20.0
 RelaxDist              = 30.0
-IsFeatureClass         = false
+IsFeatureClass         = true
 PlanarSelf             = true
 NonPlanarSelf          = true
 AvoidNewSelfIntersects = true
