@@ -1,4 +1,4 @@
-## Topologically Consistent Douglas-Peucker Line Simplification
+## Topologically Consistent Douglas-Peucker Line Simplification in the Context of Planar Constraints
 Constrained simplification of arbitrary polylines in the context of arbitrary planar geometries. [Download][9] and try it on Windows, Linux or Mac.
 
 ### how to use 
