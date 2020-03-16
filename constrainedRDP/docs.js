@@ -3,7 +3,7 @@ const path = require('path');
 
 let options = {
     source: path.join(__dirname, 'README.md'),
-    destination: "../dist/constdp/README.pdf",
+    destination: path.join(__dirname, "../dist/constdp/README.pdf"),
     ghStyle : true,
     pdf: {
         format: 'A4',
@@ -11,4 +11,6 @@ let options = {
     }
 };
 
-mdpdf.convert(options).then((pdfPath) => {}).catch((err) => {console.error(err);});
+mdpdf.convert(options).then((pdfPath) => {
+    console.log("Docs PDF Path:", pdfPath);
+}).catch((err) => {console.error(err);});
