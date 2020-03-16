@@ -1,18 +1,18 @@
 package main
 
 import (
-	"os"
+	"flag"
+	"fmt"
+	"github.com/TopoSimplify/opts"
+	"github.com/intdxdt/geom"
+	"github.com/intdxdt/math"
 	"io"
 	"log"
-	"fmt"
-	"flag"
-	"strings"
-	"runtime"
-	"github.com/intdxdt/geom"
-	"github.com/TopoSimplify/opts"
+	"os"
 	"path/filepath"
+	"runtime"
+	"strings"
 	"time"
-	"github.com/intdxdt/math"
 )
 
 var Output = "./out.txt"
@@ -134,7 +134,6 @@ func main() {
 				coordinates = append(coordinates, ln)
 				outputDict[keyIndx[i]] = ln
 			}
-
 		}
 
 		switch cfg.SimplificationType {

@@ -1,16 +1,16 @@
 package main
 
 import (
-	"os"
 	"bufio"
 	"bytes"
-	"strings"
-	"github.com/intdxdt/geom"
 	"github.com/intdxdt/fileutil"
-	"path/filepath"
-	"io/ioutil"
+	"github.com/intdxdt/geom"
 	"github.com/naoina/toml"
+	"io/ioutil"
 	"log"
+	"os"
+	"path/filepath"
+	"strings"
 )
 
 func readWKTInput(fname string) ([]geom.Coords, error) {
@@ -32,7 +32,7 @@ func readWKTInput(fname string) ([]geom.Coords, error) {
 	return polylines, err
 }
 
-func readTomlInput(fname string, callback func(data map[string]geom.Coords)) (error) {
+func readTomlInput(fname string, callback func(data map[string]geom.Coords)) error {
 	var file, err = os.Open(fname)
 	if err != nil {
 		return err
@@ -61,7 +61,7 @@ func readTomlInput(fname string, callback func(data map[string]geom.Coords)) (er
 	return err
 }
 
-func readTomlConstraints(fname string, callback func(data ConstToml)) (error) {
+func readTomlConstraints(fname string, callback func(data ConstToml)) error {
 	var file, err = os.Open(fname)
 	if err != nil {
 		return err
@@ -99,7 +99,7 @@ func readConstraints(fname string) ([]geom.Geometry, error) {
 	return geoms, err
 }
 
-func readlinesFromReader(reader *bufio.Reader, callback func(lnStr string)) (error) {
+func readlinesFromReader(reader *bufio.Reader, callback func(lnStr string)) error {
 	var err error
 	var line string
 	for {

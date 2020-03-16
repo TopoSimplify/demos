@@ -1,10 +1,10 @@
 package main
 
 import (
+	"github.com/TopoSimplify/constdp"
+	"github.com/TopoSimplify/opts"
 	"github.com/intdxdt/geom"
 	"github.com/intdxdt/iter"
-	"github.com/TopoSimplify/opts"
-	"github.com/TopoSimplify/constdp"
 )
 
 func simplifyInstances(lns []geom.Coords, opts *opts.Opts, constraints []geom.Geometry,

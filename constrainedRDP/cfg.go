@@ -1,12 +1,12 @@
 package main
 
 import (
-	"encoding/json"
-	"log"
-	"io/ioutil"
 	"bytes"
-	"github.com/naoina/toml"
+	"encoding/json"
 	"github.com/intdxdt/fileutil"
+	"github.com/naoina/toml"
+	"io/ioutil"
+	"log"
 	"os"
 	"strings"
 )
