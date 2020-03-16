@@ -16,8 +16,8 @@ function build_archive () {
     arch_postfix=$4
 
     echo "building $goos binary"
-    GOOS=${goos} GOARCH=amd64 go build -o ${tmpDIR}/${exec}${ext}
-    GOOS=${goos} GOARCH=386   go build -o ${tmpDIR}/${exec}_32bit${ext}
+    GOOS=${goos} GOARCH=amd64 go build -gcflags=-trimpath=$GOPATH -asmflags=-trimpath=$GOPATH -o ${tmpDIR}/${exec}${ext}
+    GOOS=${goos} GOARCH=386   go build -gcflags=-trimpath=$GOPATH -asmflags=-trimpath=$GOPATH -o ${tmpDIR}/${exec}_32bit${ext}
     chmod +x ${tmpDIR}/${exec}${ext}
     chmod +x ${tmpDIR}/${exec}_32bit${ext}
 
