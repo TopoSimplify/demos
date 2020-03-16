@@ -39,10 +39,6 @@ func readTomlInput(fname string, callback func(data map[string]geom.Coords)) err
 	}
 	defer file.Close()
 
-	if err != nil {
-		log.Fatalln(err)
-	}
-
 	buf, err := ioutil.ReadAll(file)
 	if err != nil {
 		return err
