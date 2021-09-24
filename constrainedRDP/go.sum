@@ -58,6 +58,8 @@ github.com/intdxdt/fileutil v0.0.1 h1:GRrun1n7BGFT4MRY/F1Sh65TE8vXYAyUzhPfxv4/us
 github.com/intdxdt/fileutil v0.0.1/go.mod h1:riFb61/YntqmZWMTp8BXTw9OM5hTQhWD9PSVc4jZfa0=
 github.com/intdxdt/geom v1.0.1 h1:jrkcsJugfFHzye0e0CCWMC2XDFK1eu+GKto73AxFOCw=
 github.com/intdxdt/geom v1.0.1/go.mod h1:YZ7A2h4AXPegZKzl3Ds7scfAmC/c3ZjLaqN+S3o9F60=
+github.com/intdxdt/geom v1.0.2 h1:ONOaR+Rivtk4xaC/0cPIGMMY6rSDVrC/Le3sg07qCdE=
+github.com/intdxdt/geom v1.0.2/go.mod h1:YZ7A2h4AXPegZKzl3Ds7scfAmC/c3ZjLaqN+S3o9F60=
 github.com/intdxdt/heap v0.0.0-20180830201411-bfa61463ae8b h1:bhxl74DHXv67coECwjBhxYaR7AyLz/dp4iCZBMelgQE=
 github.com/intdxdt/heap v0.0.0-20180830201411-bfa61463ae8b/go.mod h1:rftfIJ/6uLm3AYAFvmGu4Z017rZVaOrQ2Qsnjl2wKNs=
 github.com/intdxdt/iter v1.0.0 h1:hONzsCLtn2LMUarvWP7Znvqv4gZUq2gKNGS+QlgrREA=
