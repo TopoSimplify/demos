@@ -161,6 +161,7 @@ func optsFromCfg(cfg Cfg) opts.Opts {
 		MinDist:                cfg.MinDist,
 		RelaxDist:              cfg.RelaxDist,
 		PlanarSelf:             cfg.PlanarSelf,
+		NonPlanarSelf:          cfg.NonPlanarSelf,
 		AvoidNewSelfIntersects: cfg.AvoidNewSelfIntersects,
 		GeomRelation:           cfg.GeomRelation,
 		DistRelation:           cfg.DistRelation,
